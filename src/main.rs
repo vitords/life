@@ -19,10 +19,11 @@ fn neighbours(life: &mut Life, i: usize, j: usize) -> i32 {
     if i > 0 {
         if j > 0 {
             total += life.board[i-1][j-1];
-        }
-        total += life.board[i-1][j];
-        if j < life.board[i].len() - 1{
+        } else if j < life.board[i].len() - 1 {
             total += life.board[i-1][j+1];
+        }
+        if j >= 0 {
+            total += life.board[i-1][j];
         }
     }
     if j > 0 {
