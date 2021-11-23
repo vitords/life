@@ -1,4 +1,5 @@
 use std::fmt;
+#[derive(Clone)]
 struct Life {
     board: [[i32; 3]; 3],
 }
@@ -82,4 +83,44 @@ fn main() {
         gen += 1;
     }
 
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_neighbours() {
+        let mut life = Life{board: [[0; 3]; 3]};
+        life.board[1][0] = 1;
+        life.board[1][1] = 1;
+        life.board[1][2] = 1;
+
+        assert_eq!(neighbours(&mut life, 0, 0), 2);
+        assert_eq!(neighbours(&mut life, 0, 1), 3);
+        assert_eq!(neighbours(&mut life, 1, 1), 2);
+        
+    }
+
+    #[test]
+    fn test_evolve() {
+        let mut life = Life{board: [[0; 3]; 3]};
+        life.board[1][0] = 1;
+        life.board[1][1] = 1;
+        life.board[1][2] = 1;
+
+        let mut gen1 = Life{board: [[0; 3]; 3]};
+        gen1.board[0][1] = 1;
+        gen1.board[1][1] = 1;
+        gen1.board[2][1] = 1;
+
+        let gen2 = life.clone();
+
+        evolve(&mut life);
+        assert_eq!(life.board, gen1.board);
+
+        evolve(&mut life);
+        assert_eq!(life.board, gen2.board)
+
+    }
 }
