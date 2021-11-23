@@ -18,3 +18,8 @@ Start  Gen 0  Gen 1  Gen 2
  111    010    111    010
  000    010    000    010
  ```
+
+ ## Test
+ ```
+ $ cargo test
+ ```
